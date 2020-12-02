@@ -1,0 +1,16 @@
+.page_content{
+	overflow-y: hidden;
+}
+.page_content>header:first-child{
+	height: 40px;
+	width: 100%;
+	background: #795548;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 10;
+}
+.page_content>div:last-child{
+	margin-top: 40px;
+	height: calc(100vh - 40px);
+}

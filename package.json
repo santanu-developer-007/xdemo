@@ -1,0 +1,14 @@
+{
+	"scripts": {
+		"build": "webpack --config webpack.config.js"
+	},
+	"dependencies": {
+		"css-loader": "^5.0.1",
+		"javasx": "^1.0.5",
+		"path": "^0.12.7"
+	},
+	"devDependencies": {
+		"webpack": "^5.6.0",
+		"webpack-cli": "^4.2.0"
+	}
+}
