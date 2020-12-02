@@ -2,18 +2,21 @@
 import css from "./css.js";
 
 // Import Components --
-import { Row, Padding, Column, SizedBox, Center, Text, ScrollView } from "./components/core";
+import { Row, Padding, Column, SizedBox, Center, Text, Empty } from "./components/core";
 import Page from "./components/page";
 import Header from "./components/header";
 import Drawer from "./components/drawer";
 import DrawerTrigger from "./components/drawer/DrawerTrigger.js";
+import Textbox from "./components/forms/Textbox/Textbox.js";
+
+
 let rootNode = document.getElementById("demo");
 
 function App(){
 
-	let drawer;
+	let drawer, drawerTrigger, header, body;
 
-	let drawerTrigger = new DrawerTrigger({
+	drawerTrigger = new DrawerTrigger({
 		onOpen: function(){
 			drawer.open();
 		},
@@ -21,20 +24,6 @@ function App(){
 			drawer.close();
 		},
 	});
-	
-	let padding = new Padding({
-		"left": 20,
-		"right": 20,
-		child: new Text({child: "Hello"})
-	});
-
-	let row = new Row({
-		children: [
-			padding
-		]
-	});
-
-	console.log(drawerTrigger);
 
 	drawer = new Drawer({
 		position: "left",
@@ -43,41 +32,36 @@ function App(){
 		onClose: function(){
 			drawerTrigger.active = false;
 		},
-		child: row
+		child: new Text({child: "hello"})
+	});
+
+	header = new Header({
+		child: Row({
+			children: [
+				drawerTrigger
+			]
+		})
+	});
+
+	let t = new Textbox({
+		label: "Demo Label",
+		required: true
+	});
+
+	console.log(t);
+
+	body = new Center({
+		child: new SizedBox({
+			width: 500,
+			height: 100,
+			child: t
+		}),	
 	});
 
 	return new Page({
 		drawer: drawer,
-		header: new Header({
-			child: Row({
-				children: [
-					drawerTrigger
-				]
-			})
-		}),
-		body: new ScrollView({
-			child: new Center({
-				child: new Column({
-					children: [
-						new SizedBox({
-							style: "background-color: red;",
-							height: 600,
-							width: 500,
-							child: Text({child: "hi"})
-						})
-					]
-				})
-			})	
-		})		
-	});
-}
-function Test(){
-	return new Column({
-		children: [
-			new Column({
-				children: new Text({child: "Hi..."})
-			})
-		]
+		header: header,
+		body: body
 	});
 }
 rootNode.appendChild(new App().element);
